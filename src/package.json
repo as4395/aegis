@@ -1,0 +1,26 @@
+{
+  "name": "aegis",
+  "version": "0.1.0",
+  "description": "A self-hosted Discord bot for encrypted, privacy-first communication.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "node src/index.js",
+    "register": "node src/commands/registerCommands.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "privacy",
+    "encryption",
+    "e2ee",
+    "zero-logging"
+  ],
+  "author": "Abhiram Singireddy",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
+  }
+}
