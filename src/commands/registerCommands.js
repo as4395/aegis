@@ -9,6 +9,16 @@ const commands = [
     .setDescription('Replies with Pong.'),
 
   new SlashCommandBuilder()
+    .setName('decrypt')
+    .setDescription('Decrypt a previously encrypted message')
+    .addStringOption(opt =>
+      opt
+        .setName('encrypted')
+        .setDescription('The encrypted base64 string')
+        .setRequired(true)
+    ),
+
+  new SlashCommandBuilder()
     .setName('securesend')
     .setDescription('Send an encrypted message')
     .addStringOption(opt =>
