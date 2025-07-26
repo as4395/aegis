@@ -1,13 +1,24 @@
-// Basic in-memory session store
-const sessionMap = new Map();
+import crypto from 'crypto';
 
-export const getSession = (guildId) => {
-  if (!sessionMap.has(guildId)) {
-    sessionMap.set(guildId, { createdAt: Date.now(), keys: {} });
+// In-memory map of serverId => key
+const sessionKeys = new Map();
+
+// Generate a 32-byte (256-bit) random key
+function generateKey() {
+  return crypto.randomBytes(32);
+}
+
+// Get or generate a session key for this guild
+export function getSessionKey(guildId) {
+  if (!sessionKeys.has(guildId)) {
+    sessionKeys.set(guildId, generateKey());
   }
-  return sessionMap.get(guildId);
-};
+  return sessionKeys.get(guildId);
+}
 
-export const setSession = (guildId, data) => {
-  sessionMap.set(guildId, { ...data, updatedAt: Date.now() });
-};
+// Manual key rotation
+export function rotateKey(guildId) {
+  const newKey = generateKey();
+  sessionKeys.set(guildId, newKey);
+  return newKey;
+}
