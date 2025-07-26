@@ -1,17 +1,18 @@
 import { pingCommand } from '../commands/ping.js';
 import { secureSendCommand } from '../commands/secureSend.js';
+import { decryptCommand } from '../commands/decrypt.js';
 
 export const registerHandlers = async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   switch (interaction.commandName) {
     case 'ping':
-      await pingCommand(interaction);
-      break;
+      return pingCommand(interaction);
     case 'securesend':
-      await secureSendCommand(interaction);
-      break;
+      return secureSendCommand(interaction);
+    case 'decrypt':
+      return decryptCommand(interaction);
     default:
-      await interaction.reply({ content: 'Unknown command', ephemeral: true });
+      return interaction.reply({ content: 'Unknown command', ephemeral: true });
   }
 };
