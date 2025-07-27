@@ -7,8 +7,7 @@ export const data = new SlashCommandBuilder()
   .setDefaultMemberPermissions(PermissionFlagsBits.Administrator);
 
 export async function execute(interaction) {
-  const guildId = interaction.guildId;
-  rotateKey(guildId);
+  rotateKey(interaction.guildId);
   await interaction.reply({
     content: '🔐 Encryption key has been rotated for this server.',
     ephemeral: true
