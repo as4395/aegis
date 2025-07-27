@@ -1,33 +1,20 @@
-import { REST, Routes, SlashCommandBuilder } from 'discord.js';
+import { REST, Routes } from 'discord.js';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
+import * as ping from './ping.js';
+import * as decrypt from './decrypt.js';
+import * as secureSend from './secureSend.js';
+import * as rotateKey from './rotateKey.js';
+import * as toggleLogging from './toggleLogging.js';
+
 const commands = [
-  new SlashCommandBuilder()
-    .setName('ping')
-    .setDescription('Replies with Pong.'),
-
-  new SlashCommandBuilder()
-    .setName('decrypt')
-    .setDescription('Decrypt a previously encrypted message')
-    .addStringOption(opt =>
-      opt
-        .setName('encrypted')
-        .setDescription('The encrypted base64 string')
-        .setRequired(true)
-    ),
-
-  new SlashCommandBuilder()
-    .setName('securesend')
-    .setDescription('Send an encrypted message')
-    .addStringOption(opt =>
-      opt
-        .setName('message')
-        .setDescription('The message to encrypt and send')
-        .setRequired(true)
-    )
-].map(command => command.toJSON());
+  ping.data,
+  decrypt.data,
+  secureSend.data,
+  rotateKey.data,
+  toggleLogging.data
+].map(cmd => cmd.toJSON());
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
