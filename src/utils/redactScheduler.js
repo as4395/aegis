@@ -1,6 +1,6 @@
 import { setTimeout } from 'node:timers/promises';
 
-// Redact a message after N seconds (e.g. 60)
+// Auto-delete a message after N seconds
 export async function scheduleRedaction(message, delaySec = 60) {
   try {
     await setTimeout(delaySec * 1000);
